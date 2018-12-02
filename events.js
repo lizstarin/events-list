@@ -21,7 +21,8 @@ window.onload = function(e) {
 				},
 				properties: {
 					title: e.title,
-					description: e.description
+					description: e.description,
+					url: e.browser_url
 				}
 			};
 
@@ -37,12 +38,14 @@ window.onload = function(e) {
 	var addMarkers = function(geojson) {
 		geojson.features.forEach(function(marker) {
 
-		  var el = document.createElement('div');
-		  el.className = 'marker';
+			var el = document.createElement('div');
+		  	el.className = 'marker';
 
-		  new mapboxgl.Marker(el)
-		  .setLngLat(marker.geometry.coordinates)
-		  .addTo(map);
+		  	new mapboxgl.Marker(el)
+		  	.setLngLat(marker.geometry.coordinates)
+		  	.setPopup(new mapboxgl.Popup({ offset: 25 })
+  			.setHTML('<a href="' + marker.properties.url + '"><h3>' + marker.properties.title + '</h3></a><p>' + marker.properties.description + '</p>'))
+		  	.addTo(map);
 		});	
 	};
 
