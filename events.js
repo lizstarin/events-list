@@ -8,12 +8,11 @@ window.onload = function(e) {
 		zoom: 3.5
 	});
 
-	var buildGeoJson = function(json) {
-		var events = json.data;
+	var buildGeoJson = function(events) {
 		var located = events.filter(e => e.location != null);
 
 		var features = []
-		located.forEach(function(e) {
+		located.forEach(function(e) {			// I'm not sure why Array.map didn't work, but it didn't!
 			var feature = {
 				type: 'Feature',
 				geometry: {
@@ -47,13 +46,24 @@ window.onload = function(e) {
 		});	
 	};
 
+	var addList = function(events) {
+		events.forEach(function(e) {
+			var el = document.createElement('div');
+			var content = document.createTextNode(e.title);
+			el.appendChild(content);
+			document.getElementById('list').appendChild(el);
+		});
+	};
+
 	fetch('https://events.mobilizeamerica.io/api/v1/events')
-	  .then(function(response) {
-	    return response.json();
-	  })
-	  .then(function(eventsJson) {
-	    var geojson = buildGeoJson(eventsJson);
-	    addMarkers(geojson);
-	  });
+		.then(function(response) {
+	    	return response.json();
+	  	})
+	  	.then(function(eventsJson) {
+	  		var events = eventsJson.data
+	    	var geojson = buildGeoJson(events);
+	    	addMarkers(geojson);
+	    	addList(events);
+	  	});
 
 }
