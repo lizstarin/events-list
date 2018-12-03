@@ -5,6 +5,7 @@ body {
 
 .container {
 	display: flex;
+	height: 100vh;
 }
 
 @media (max-width: 500px) {
@@ -21,19 +22,28 @@ body {
 
 #map {
 	flex: 3; 
-	display: flex;
 }
 
 #list {
 	flex: 1;
+	height: 100vh;
+	overflow: scroll;
 }
 
 h2 {
 	margin: 10px;
 }
 
-.item {
+.event-item {
 	margin: 10px;
+}
+
+.event-title {
+
+}
+
+.event-summary {
+	font-size: .8em;
 }
 
 .marker {

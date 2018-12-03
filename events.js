@@ -6,7 +6,7 @@ var eventsList = function () {
 			return new mapboxgl.Map({
 				container: 'map',
 				style: 'mapbox://styles/mapbox/streets-v10',
-				center: [-95, 35],
+				center: [-95, 37],
 				zoom: 3.5
 			});
 		};
@@ -24,6 +24,7 @@ var eventsList = function () {
 					},
 					properties: {
 						title: e.title,
+						summary: e.summary,
 						description: e.description,
 						url: e.browser_url,
 						id: e.id
@@ -54,12 +55,24 @@ var eventsList = function () {
 			});	
 		};
 
+		var createDivWithText = function(textString, classString) {
+			var el = document.createElement('div');
+			var text = document.createTextNode(textString);
+			el.appendChild(text);
+			el.className = classString;
+			return el;
+		};
+
 		var addList = function(events) {
 			events.forEach(function(e) {
 				var el = document.createElement('div');
-				var content = document.createTextNode(e.title);
-				el.className = 'item';
-				el.appendChild(content);
+				el.className = 'event-item';
+
+				var title = createDivWithText(e.title, 'event-title');
+				var summary = createDivWithText(e.summary, 'event-summary');
+
+				el.appendChild(title);
+				el.appendChild(summary);
 				el.dataset.id = e.id;
 				document.getElementById('list').appendChild(el);
 			});
