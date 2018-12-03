@@ -14,8 +14,6 @@
 
 - Write backend to rotate public token (consider making API call from backend)
 
-- Minification
-
 - jQuery, maybe?
 
 - Fancy UI stuff: hovering on an event in the list should show the event's popup on the map (for example)
