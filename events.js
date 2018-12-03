@@ -68,11 +68,14 @@ var eventsList = function () {
 				var el = document.createElement('div');
 				el.className = 'event-item';
 
+				var eventLink = document.createElement('a')
+				eventLink.href = e.url;
 				var title = createDivWithText(e.title, 'event-title');
 				var summary = createDivWithText(e.summary, 'event-summary');
+				eventLink.appendChild(title);
+				eventLink.appendChild(summary);
 
-				el.appendChild(title);
-				el.appendChild(summary);
+				el.appendChild(eventLink);
 				el.dataset.id = e.id;
 				document.getElementById('list').appendChild(el);
 			});
