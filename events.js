@@ -6,7 +6,7 @@ var eventsList = function () {
 			return new mapboxgl.Map({
 				container: 'map',
 				style: 'mapbox://styles/mapbox/streets-v10',
-				center: [-95, 39],
+				center: [-95, 35],
 				zoom: 3.5
 			});
 		};
@@ -63,6 +63,7 @@ var eventsList = function () {
 				el.dataset.id = e.id;
 				document.getElementById('list').appendChild(el);
 			});
+			map.resize();
 		};
 
 		var getData = function() {
