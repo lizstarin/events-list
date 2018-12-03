@@ -12,7 +12,9 @@ var eventsList = function () {
 		};
 
 		var buildGeoJson = function(events) {
-			var located = events.filter(e => e.location != null);
+			var located = events.filter(function(e) {
+				return e.location != null;
+			});
 
 			var features = []
 			located.forEach(function(e) {			// I'm not sure why Array.map didn't work, but it didn't!
@@ -69,7 +71,7 @@ var eventsList = function () {
 				el.className = 'event-item';
 
 				var eventLink = document.createElement('a')
-				eventLink.href = e.url;
+				eventLink.href = e.browser_url;
 				var title = createDivWithText(e.title, 'event-title');
 				var summary = createDivWithText(e.summary, 'event-summary');
 				eventLink.appendChild(title);
@@ -79,7 +81,6 @@ var eventsList = function () {
 				el.dataset.id = e.id;
 				document.getElementById('list').appendChild(el);
 			});
-			map.resize();
 		};
 
 		var getData = function() {
@@ -96,6 +97,7 @@ var eventsList = function () {
 			    	var geojson = buildGeoJson(events);
 			    	addMarkers(geojson);
 			    	addList(events);
+			    	map.resize();
 			  	}).catch(function(error) {
 			  		console.log('fetch error: ', error.message);
 			  		window.location = 'error.html';
