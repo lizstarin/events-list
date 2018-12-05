@@ -2,8 +2,6 @@
 
 ## Start guide:
 
-- ```npm install @mapbox/mapbox-sdk```
-
 - Open ```index.html``` in a browser.
 
 ## To do:
